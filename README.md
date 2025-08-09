@@ -153,10 +153,6 @@ It is designed to minimize DevOps overhead and empower developers, analysts, and
 
 ---
 
-## 🧾 License
-
-*To be decided*
-
 ## 📄 Contributions
 
-*Coming soon in **`CONTRIBUTING.md`** once open source is enabled.*
+*Coming soon in **`CONTRIBUTING.md`**.
