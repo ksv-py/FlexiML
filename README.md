@@ -1,125 +1,162 @@
-# 🚀 FlexiML – Automated Machine Learning Trainer
+# 📦 FlexiML — End-to-End AutoML Trainer & API Platform
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/release/python-3100/)
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/fleximl/actions)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](../../issues)
+## 🚀 Project Overview
 
-**FlexiML** is a powerful, flexible AutoML engine designed to simplify the machine learning workflow. Upload your data, select preprocessing options, choose a model or let the system pick the best one, and get trained models and preprocessors ready for integration – all in one platform.
+FlexiML is a modular, scalable AutoML platform that enables users to:
 
----
+* Upload datasets (CSV/XLSX)
+* Preprocess data with user-defined or automatic pipelines
+* Train ML models (manual/auto)
+* Analyze visual metrics
+* Instantly deploy models via REST APIs
 
-## 🔧 Features
-
-* 📂 **Data Ingestion**: Upload CSV or other data formats
-* 🧹 **Preprocessing Options**: Custom or automated imputers, encoding, scaling
-* 🧠 **Model Training**:
-
-  * Choose your own model (e.g., Random Forest, XGBoost, etc.)
-  * Or let FlexiML select and tune the best model for your data
-* ⚙️ **Custom/Auto Hyperparameter Tuning**
-* 📦 **Downloadable Preprocessor & Model Files**
-* 🔌 **Integrate your trained pipeline via API (future)**
-* 📈 **Analytics & Model Evaluation**
-* 🧠 **Auto-retraining (planned)**
-* ☁️ **SaaS-ready Architecture (planned)**
+It is designed to minimize DevOps overhead and empower developers, analysts, and startups to rapidly prototype and deploy ML workflows.
 
 ---
 
-## 📁 Project Structure
+## 🧠 Key Differentiators
 
-```
-fleximl/
-├── app/                # Core logic: ingestion, preprocessing, training
-├── api/                # REST API (Flask/FastAPI)
-├── data/               # Sample datasets
-├── models/             # Saved models & preprocessors
-├── notebooks/          # Development notebooks
-├── utils/              # Helper scripts
-├── tests/              # Unit tests
-├── LICENSE
-├── README.md
-├── requirements.txt
-└── environment.yml
-```
+* One-click model deployment with persistent asset IDs
+* Visual analytics throughout the pipeline
+* Supports both manual and AutoML-based training
+* MongoDB + GridFS for efficient storage and versioning
+* Modular service-oriented FastAPI backend and React frontend
 
 ---
 
-## 🚀 Getting Started
+## 📦 Core Features (v1.0)
 
-### 1. Clone the repo
+### 🔹 Dataset Upload
 
-```bash
-git clone https://github.com/yourusername/fleximl.git
-cd fleximl
-```
+* Accepts `.csv` and `.xlsx`
+* Stored via MongoDB GridFS
+* Returns a unique `file_id`
 
-### 2. Create Conda Environment
+### 🔹 Dataset Preview
 
-```bash
-conda create -n fleximl python=3.10
-conda activate fleximl
-```
+* Infers data types, missing values, imbalance
+* Classifies columns into: numerical, categorical, target
 
-### 3. Install Requirements
+### 🔹 Preprocessing
 
-```bash
-pip install -r requirements.txt
-```
+* Options: mean, median, mode imputation; optional scaling/encoding
+* Saves transformation pipeline to GridFS → returns `preprocessor_id`
 
----
+### 🔹 Model Training
 
-## 💡 Usage
+* Manual or automatic model selection
+* Hyperparameter tuning (optional)
+* Trained model saved to GridFS → returns `model_id`
+* Returns training metrics
 
-* Launch the CLI or Web UI (coming soon)
-* Upload a dataset
-* Select your options
-* Train & export model pipeline
-* Use the exported model in your own app
+### 🔹 Prediction Endpoint
 
----
+* Requires: `file_id`, `preprocessor_id`, `model_id`
+* Returns real-time predictions
 
-## 📜 License
+### 🔹 Analytics Dashboard
 
-This project is licensed under the [MIT License](LICENSE).
-You are free to use, modify, and distribute this code.
+* Missing value summary, feature distribution plots
+* Model Evaluation: Accuracy, F1, Confusion Matrix
 
 ---
 
-## 🌐 Roadmap (Upcoming)
+## 📈 Extended Features (v1.5 – v2.0)
 
-* [ ] AutoML Search Optimization
-* [ ] Model Explainability (SHAP, LIME)
-* [ ] API Endpoint for Trained Models
-* [ ] SaaS Dashboard
-* [ ] Team Collaboration Features
-* [ ] Secure Dataset Storage
+* Auto EDA Reports
+* Auto Feature Engineering (binning, outlier detection)
+* Model Leaderboard
+* SHAP/LIME Explainability
+* Retraining on new datasets
+* File tracking, logging, and user authentication
 
----
+## 🔬 Future Roadmap (v3.0+)
 
-## 🤝 Contributing
-
-Contributions, suggestions, and feedback are welcome!
-Feel free to open an issue or submit a pull request.
-
----
-
-## 🧠 Built With
-
-* Python 🐍
-* Scikit-learn
-* XGBoost / LightGBM / CatBoost
-* Pandas & NumPy
-* Flask or FastAPI
-* Conda
+* Fine-tuning LLMs on private data
+* NLP & Vision support
+* Bias Detection & Explainability
+* Synthetic Data Generation
+* SaaS tiers + VS Code extension
 
 ---
 
-## 👨‍💻 Author
+## 🧑‍💻 Tech Stack
 
-**Keshav Jangid**
-🔗 [GitHub](https://github.com/ksv-py) | ✉️ Open to collaboration
+* **Backend**: FastAPI, Pydantic
+* **Frontend**: React, TailwindCSS, Recharts
+* **ML Engine**: scikit-learn, pandas, matplotlib
+* **Database**: MongoDB + GridFS
+* **Deployment**: Docker, GitHub Actions, Render/EC2
+* **Security**: API Key Auth, Rate Limiting, File Expiry
 
 ---
 
-> Made with ❤️ for developers who want to build smarter, faster.
+## 🛠️ System Architecture
+
+### 📊 Architecture Overview
+
+* Frontend (React) interacts with FastAPI backend
+* FastAPI handles dataset ingestion, processing, and model training
+* MongoDB GridFS stores all datasets, preprocessors, and models
+* Frontend fetches analytics and visualizations via asset IDs
+* REST API is available for plug-n-play deployment
+
+### 📁 Component Breakdown
+
+* **Frontend**: File upload, preprocessing config, training UI, analytics dashboard
+* **Backend**:
+
+  * Upload & Preprocess Service
+  * Training Engine
+  * Prediction & Evaluation Module
+  * MongoDB Persistence Layer
+
+### 🔄 Data Flow
+
+* UI → FastAPI → GridFS/MongoDB
+* FastAPI → ML pipeline → returns IDs and metrics
+* UI → displays results, allows prediction
+
+---
+
+## 🧩 Model Registry & Preprocessing Pipeline
+
+* Every model and preprocessing step saved with unique IDs
+* GridFS used for versioned storage and reuse
+* Models and transformers are persisted, trackable, and deployable
+
+---
+
+## 📜 OpenAPI & API Docs
+
+* Full OpenAPI 3.1 spec in `openapi.json`
+* Swagger UI-ready
+* Endpoints:
+
+  * `/upload` → dataset upload
+  * `/preview/{file_id}` → basic insights
+  * `/preprocess` → transformer pipeline
+  * `/train` → model training
+  * `/predict` → model inference
+  * `/metrics/{model_id}` → evaluation stats
+
+---
+
+## 📅 Version Timeline
+
+| Version | Features                              | Timeline   |
+| ------- | ------------------------------------- | ---------- |
+| v1.0    | Upload → Preprocess → Train → Predict | Week 1–3   |
+| v1.5    | Analytics + Retrain                   | Week 4–6   |
+| v2.0    | Auth, SaaS, File Logs                 | Week 7–10  |
+| v3.0    | LLM, NLP, CV, SHAP                    | Week 11–14 |
+
+---
+
+## 🧾 License
+
+*To be decided*
+
+## 📄 Contributions
+
+*Coming soon in **`CONTRIBUTING.md`** once open source is enabled.*
