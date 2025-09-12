@@ -4,7 +4,7 @@ from fastapi.responses import StreamingResponse
 from app.database import db, fs
 import pandas as pd
 
-router = APIRouter(prefix="/datasets")
+router = APIRouter(prefix="/datasets", tags=["datasets"])
 
 
 # Dataset Upload Route
