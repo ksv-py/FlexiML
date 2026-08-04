@@ -82,3 +82,4 @@ instance/
 # Other
 *.env
 .env.*
+catboost_info/

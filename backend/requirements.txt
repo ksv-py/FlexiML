@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+python-dotenv
+pymongo[srv]
+pandas
+numpy
+scikit-learn
+xgboost
+catboost
+lightgbm
+openpyxl
+python-multipart
+bcrypt
+razorpay
+gridfs
