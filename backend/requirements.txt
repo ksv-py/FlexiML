@@ -14,4 +14,3 @@ openpyxl
 python-multipart
 bcrypt
 razorpay
-gridfs
