@@ -15,9 +15,13 @@ export default defineConfig({
   },
   // Preview server options (used by `vite preview` / production preview)
   preview: {
-    host: true,
+    // Allow the Railway-assigned host used in production preview
+    // Add specific host to avoid blocking requests in Vite preview runtime
+    host: '0.0.0.0',
     port: 4173,
-    // Allow the Railway production host (update if your domain differs)
-    allowedHosts: ['frontend-production-59cad.up.railway.app', 'localhost', '127.0.0.1'],
+    allowedHosts: [
+      'frontend-production-59cad.up.railway.app',
+      'localhost',
+    ],
   },
 })

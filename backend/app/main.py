@@ -12,6 +12,7 @@ from app.routes.auth import router as auth_router
 from app.routes.analysis import router as analysis_router
 from app.routes.payments import router as payments_router
 from app.services.cleanup import cleanup_free_models_loop
+from app.config import settings
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -31,7 +32,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

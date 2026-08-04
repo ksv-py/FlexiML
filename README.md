@@ -21,8 +21,8 @@ pip install -r backend/requirements.txt
 
 ```powershell
 cd backend
-uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
-# or: python -m uvicorn backend.app.main:app --reload
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+# or: python -m uvicorn app.main:app --reload
 ```
 
 Frontend quick start

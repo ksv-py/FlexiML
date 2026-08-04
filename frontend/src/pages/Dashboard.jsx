@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [me, setMe] = useState(null)
 
   const apiKey = localStorage.getItem('fleximl_api_key')
+  const API_URL = import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
 
   useEffect(() => {
     if (!apiKey) { navigate('/'); return }
@@ -221,7 +222,7 @@ export default function Dashboard() {
                   🚀 Train New Model
                 </button>
                 <a
-                  href="http://localhost:8000/docs"
+                  href={`${API_URL}/docs`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline w-full"
@@ -243,7 +244,7 @@ export default function Dashboard() {
                 color: 'var(--accent-light)',
                 wordBreak: 'break-all',
               }}>
-                {import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'}
+                {API_URL}
               </code>
             </div>
           </div>
